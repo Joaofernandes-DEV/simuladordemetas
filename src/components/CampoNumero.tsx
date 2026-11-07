@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import { escreverNumero, lerNumero } from '../domain/numero';
 
 const mesmo = (a: number | null, b: number | null) =>
@@ -25,14 +25,13 @@ interface Props {
  */
 export function CampoNumero({ id, rotulo, rotuloOculto, valor, aoMudar, escala = 1, sufixo, decimal, dica, placeholder }: Props) {
   const [texto, setTexto] = useState(() => escreverNumero(valor, escala));
-  const ultimo = useRef(valor);
+  const [visto, setVisto] = useState(valor);
 
-  useEffect(() => {
-    if (!mesmo(valor, ultimo.current)) {
-      ultimo.current = valor;
-      setTexto(escreverNumero(valor, escala));
-    }
-  }, [valor, escala]);
+  // Valor mudou por fora (importação): reescreve o texto no mesmo desenho, sem efeito nem quadro atrasado.
+  if (!mesmo(valor, visto)) {
+    setVisto(valor);
+    setTexto(escreverNumero(valor, escala));
+  }
 
   const invalido = valor !== null && Number.isNaN(valor);
   const idDica = dica ? `${id}-dica` : undefined;
@@ -58,7 +57,7 @@ export function CampoNumero({ id, rotulo, rotuloOculto, valor, aoMudar, escala =
             setTexto(t);
             const n = lerNumero(t);
             const v = n === null || Number.isNaN(n) ? n : n / escala;
-            ultimo.current = v;
+            setVisto(v);
             aoMudar(v);
           }}
         />

@@ -27,9 +27,15 @@ Abra o endereço que aparecer no terminal (normalmente http://localhost:5173).
 
 Vite + React + TypeScript (estrito) + Tailwind 4, testes com Vitest. Sem backend e sem serviços externos: fonte Inter dentro do repositório, CSP estrita em `vercel.json`. Hospedagem na Vercel.
 
+## Salvar e abrir
+
+- **Exportar JSON:** guarda a simulação inteira (meta, prazo, etapas e taxas dos três cenários).
+- **Exportar CSV:** formato do Excel brasileiro (`;` e vírgula decimal, taxas em %). Abre com duplo clique.
+- **Importar arquivo:** aceita o JSON ou o CSV exportados (inclusive o CSV salvo de novo pelo Excel). Arquivo inválido não altera nada.
+
 ## Privacidade
 
-Nenhum dado pessoal de lead (nome, telefone, e-mail) entra no código, nos testes ou no histórico. Os dados ficam só no navegador e saem por exportação em JSON ou CSV.
+Nenhum dado pessoal de lead (nome, telefone, e-mail) entra no código, nos testes ou no histórico. Os dados ficam só no navegador e saem por exportação em JSON ou CSV, direto para o computador de quem usa: nada é enviado para servidor.
 
 ## Estado
 

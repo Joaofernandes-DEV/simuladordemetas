@@ -213,6 +213,12 @@ input[type='date'].campo__input { padding-right: 0.5rem; }
 .aviso--inviavel b { color: var(--c-warm-text); }
 .aviso--info { border-left-color: var(--c-accent); }
 
+/* ---------- Salvar e abrir ---------- */
+.acoes { display: flex; flex-wrap: wrap; gap: var(--s-3); }
+.mensagem { margin: 0; font-size: var(--fs-small); line-height: 1.45; min-height: 1.45em; }
+.mensagem--ok { color: var(--fg-2); }
+.mensagem--erro { color: var(--c-warm-text); font-weight: 600; }
+
 @media (max-width: 760px) {
   .funil__cabeca { display: none; }
   .funil__linha {
