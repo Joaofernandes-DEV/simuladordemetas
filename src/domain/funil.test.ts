@@ -60,6 +60,10 @@ describe('validarTaxas', () => {
     const a = validarTaxas(etapas, { ag: 0, co: 1.2, ma: 0.25 });
     expect(a.map((x) => x.tipo)).toEqual(['inviavel', 'inviavel']);
   });
+  it('marca taxa que não é número como inviável', () => {
+    const a = validarTaxas(etapas, { ag: Number.NaN, co: 0.5, ma: 0.25 });
+    expect(a).toEqual([{ tipo: 'inviavel', mensagem: 'A taxa da etapa "Agendamento" não é um número válido.' }]);
+  });
   it('pede ao menos uma etapa', () => {
     expect(validarTaxas([], {})[0]?.tipo).toBe('incompleto');
   });

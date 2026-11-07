@@ -2,6 +2,25 @@
 
 Tudo o que muda no projeto entra aqui, no mesmo commit ou PR da mudança. Horários em Brasília (AAAA-MM-DD HH:MM). Entradas mais novas no topo.
 
+## 2026-11-07 10:58 — E2: tela do simulador
+
+**Feito**
+- Painel "Meta e prazo": meta, início (hoje), fim (vazio de propósito), modo de contagem, folgas, contatos já feitos e capacidade diária (opcionais).
+- Painel "Funil por cenário": uma linha por etapa, uma coluna por cenário; nome editável; adicionar (entra antes da meta, com taxas vazias) e remover (nunca a última). Taxas em %, aceitando vírgula.
+- Três cartões lado a lado (empilhados no celular): contatos por dia em destaque, total, restantes, dias, o funil de trás para frente e os avisos (incompleto, inviável em laranja, observação em azul).
+- Valores iniciais fictícios em `src/domain/exemplo.ts` (decididos na E1).
+- Domínio: texto que não é número agora vira aviso de inválido, não de "falta"; funções puras de edição em `editar.ts`; leitura de números em pt-BR em `numero.ts`.
+- Acessibilidade: rótulos em todos os campos (taxas com rótulo completo para leitor de tela), `aria-invalid`, foco vai para a etapa nova ou vizinha ao adicionar ou remover, resumo dos cenários anunciado quando a digitação para.
+- Laranja de aviso escurece para `#b25000` no tema claro (AA).
+
+**Verificado**
+- `npm run build` e 54 testes passando.
+- Chrome, 1482 px: prazo de 07/11 a 04/12/2026 (seg–sex, 20 dias) → conservador 21, realista 10, otimista 6 por dia.
+- 360 px (iframe na própria página): sem rolagem lateral, todos os alvos com pelo menos 44 px, funil em três colunas por etapa, tema escuro com cartão inviável (capacidade 15).
+
+**Não testado ainda**
+- Celular real, leitor de tela real (NVDA ou TalkBack) e Safari.
+
 ## 2026-11-07 10:55 — E1: funções puras do funil
 
 **Feito** (em `src/domain/`, sem React, sem data do sistema, sem armazenamento)

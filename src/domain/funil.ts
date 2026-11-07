@@ -17,8 +17,10 @@ export function validarTaxas(etapas: Etapa[], taxas: Taxas): Aviso[] {
   for (const e of etapas) {
     const t = taxas[e.id];
     const nome = e.nome.trim() || 'sem nome';
-    if (t === null || t === undefined || Number.isNaN(t)) {
+    if (t === null || t === undefined) {
       avisos.push({ tipo: 'incompleto', mensagem: `Falta a taxa da etapa "${nome}".` });
+    } else if (!Number.isFinite(t)) {
+      avisos.push({ tipo: 'inviavel', mensagem: `A taxa da etapa "${nome}" não é um número válido.` });
     } else if (t <= 0) {
       avisos.push({ tipo: 'inviavel', mensagem: `A taxa da etapa "${nome}" é 0%: nenhum volume chega à meta.` });
     } else if (t > 1) {

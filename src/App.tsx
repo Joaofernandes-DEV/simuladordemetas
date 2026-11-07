@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Simulador } from './components/Simulador';
 import { useReveal } from './hooks/useReveal';
 import { alternar, aplicarTema, lerTemaSalvo, salvarTema, temaInicial, type Tema } from './theme';
 
@@ -57,18 +58,20 @@ export default function App() {
         </div>
       </header>
 
-      <main id="conteudo" tabIndex={-1} className="wrap" style={{ paddingBlock: 'clamp(3rem, 10vh, 7rem)' }}>
-        <section aria-labelledby="titulo" className="grid gap-6">
+      <main id="conteudo" tabIndex={-1} className="wrap principal">
+        <section aria-labelledby="titulo" className="abertura">
           <p className="eyebrow reveal">Funil de captação, de trás para frente</p>
-          <h1 id="titulo" className="display reveal">Da meta ao contato do dia.</h1>
+          <h1 id="titulo" className="display display--md reveal">Da meta ao contato do dia.</h1>
           <p className="lead reveal">
             Informe a meta de matrículas, o prazo e as taxas de cada etapa. O simulador calcula quantos contatos são necessários por dia.
           </p>
-          <div role="note" className="card card--accent reveal max-w-2xl">
+          <div role="note" className="card card--accent reveal aviso-ficticio">
             <strong>Dados fictícios, ajuste para a sua realidade.</strong>{' '}
             Todos os valores iniciais são exemplos inventados para demonstração, não números reais de nenhuma empresa.
           </div>
         </section>
+
+        <Simulador />
       </main>
 
       <div className="grain" aria-hidden="true" />

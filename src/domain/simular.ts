@@ -8,7 +8,7 @@ const fmt = (n: number) => n.toLocaleString('pt-BR');
 function validarGeral(s: Simulacao): { avisos: Aviso[]; dias: number | null } {
   const avisos: Aviso[] = [];
 
-  if (s.meta === null || Number.isNaN(s.meta)) {
+  if (s.meta === null) {
     avisos.push({ tipo: 'incompleto', mensagem: 'Falta a meta de matrículas.' });
   } else if (!Number.isInteger(s.meta) || s.meta <= 0) {
     avisos.push({ tipo: 'inviavel', mensagem: 'A meta precisa ser um número inteiro maior que zero.' });

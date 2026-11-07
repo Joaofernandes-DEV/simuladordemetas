@@ -75,7 +75,7 @@ describe('simular', () => {
   });
 
   it('meta não inteira ou zero é inviável', () => {
-    for (const meta of [0, -3, 2.5]) {
+    for (const meta of [0, -3, 2.5, Number.NaN]) {
       const s = base();
       s.meta = meta;
       expect(simular(s)[0]!.avisos[0]?.tipo).toBe('inviavel');
