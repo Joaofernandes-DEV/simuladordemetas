@@ -4,6 +4,7 @@ import { formatar } from '../domain/numero';
 import { simular } from '../domain/simular';
 import type { ResultadoCenario, Simulacao } from '../domain/types';
 import { CartaoResultado } from './CartaoResultado';
+import { PainelArquivos } from './PainelArquivos';
 import { PainelFunil } from './PainelFunil';
 import { PainelMeta } from './PainelMeta';
 
@@ -44,6 +45,8 @@ export function Simulador({ inicial }: { inicial?: Simulacao }) {
           {resultados.map((r) => <CartaoResultado key={r.cenarioId} r={r} />)}
         </div>
       </section>
+
+      <PainelArquivos s={s} substituir={setS} />
 
       <p className="sr-only" aria-live="polite" aria-atomic="true">{anuncio}</p>
     </>
