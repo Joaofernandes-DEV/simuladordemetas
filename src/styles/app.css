@@ -28,6 +28,7 @@
   --fg-2: rgba(245, 245, 247, 0.66);
   --accent-text: #2997ff;
   --c-warm-text: #ff9f0a;
+  --campo-borda: 40%; /* contorno do campo com contraste ≥ 3:1 (WCAG 1.4.11) */
   --glass-bg: rgba(22, 22, 24, 0.62);
   --glass-edge: rgba(255, 255, 255, 0.14);
   --btn-bg: #f5f5f7;
@@ -42,8 +43,9 @@ html[data-theme='light'] {
   --fg: #1d1d1f;
   --fg-2: rgba(29, 29, 31, 0.68);
   --accent-text: #0066cc;
-  /* O laranja #ff9f0a não passa no AA sobre o claro; aqui ele escurece. */
-  --c-warm-text: #b25000;
+  /* No claro, laranja e contorno escurecem para passar no AA (medido em cartão e aviso). */
+  --c-warm-text: #a04500;
+  --campo-borda: 55%;
   --glass-bg: rgba(250, 250, 252, 0.7);
   --glass-edge: rgba(255, 255, 255, 0.9);
   --btn-bg: #1d1d1f;
@@ -60,10 +62,10 @@ body {
   background: var(--bg); color: var(--fg); overflow-x: clip;
   transition: background-color var(--dur-2) var(--ease-out), color var(--dur-2) var(--ease-out);
 }
-:focus-visible { outline: 2px solid var(--c-accent); outline-offset: 4px; border-radius: 8px; }
+:focus-visible { outline: 2px solid var(--accent-text); outline-offset: 4px; border-radius: 8px; }
 .skip {
   position: fixed; left: 1rem; top: 1rem; z-index: 100; padding: 0.5rem 1rem; border-radius: 999px;
-  background: var(--c-accent); color: #fff; font-weight: 600; text-decoration: none;
+  background: #0066cc; color: #fff; font-weight: 600; text-decoration: none;
   transform: translateY(-200%); transition: transform var(--dur-2) var(--ease-out);
 }
 .skip:focus { transform: none; }
@@ -154,11 +156,11 @@ main:focus { outline: none; }
   width: 100%; box-sizing: border-box; min-height: var(--tap); padding: 0 0.875rem;
   font: 400 var(--fs-body) / 1.2 var(--font); color: var(--fg); font-variant-numeric: tabular-nums;
   background: color-mix(in srgb, currentColor 6%, transparent);
-  border: 1px solid color-mix(in srgb, currentColor 22%, transparent); border-radius: 0.75rem;
+  border: 1px solid color-mix(in srgb, currentColor var(--campo-borda), transparent); border-radius: 0.75rem;
   transition: border-color var(--dur-2) var(--ease-out), background-color var(--dur-2) var(--ease-out);
 }
-.campo__input:hover { border-color: color-mix(in srgb, currentColor 40%, transparent); }
-.campo__input:focus-visible { outline-offset: 2px; border-color: var(--c-accent); }
+.campo__input:hover { border-color: color-mix(in srgb, currentColor 75%, transparent); }
+.campo__input:focus-visible { outline-offset: 2px; border-color: var(--accent-text); }
 .campo__input[aria-invalid='true'] { border-color: var(--c-warm-text); border-width: 2px; }
 .campo__caixa .campo__input { padding-right: 2rem; }
 .campo__sufixo { position: absolute; right: 0.875rem; top: 50%; transform: translateY(-50%); color: var(--fg-2); pointer-events: none; }
@@ -175,8 +177,7 @@ input[type='date'].campo__input { padding-right: 0.5rem; }
 .funil:focus { outline: none; }
 .funil__cabeca, .funil__linha { display: grid; grid-template-columns: var(--colunas); gap: var(--s-3); align-items: center; }
 .funil__cabeca { font-size: var(--fs-small); font-weight: 600; color: var(--fg-2); }
-.funil__topo-linha { display: contents; }
-.funil__remover { order: 99; flex-shrink: 0; }
+.funil__remover { flex-shrink: 0; }
 .funil__nome { grid-template-columns: 1.5rem 1fr; align-items: center; }
 .funil__ordem { font-size: var(--fs-small); font-weight: 600; color: var(--fg-2); font-variant-numeric: tabular-nums; }
 .funil__cenario { display: none; font-size: var(--fs-micro); font-weight: 600; color: var(--fg-2); }
@@ -225,8 +226,10 @@ input[type='date'].campo__input { padding-right: 0.5rem; }
     grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s-3) var(--s-2);
     padding-bottom: var(--s-4); border-bottom: 1px solid color-mix(in srgb, currentColor 12%, transparent);
   }
-  .funil__topo-linha { display: flex; align-items: center; gap: var(--s-2); grid-column: 1 / -1; }
-  .funil__nome { flex: 1; }
+  /* Nome na largura toda (com espaço para o ×, que fica no canto); as taxas descem para a segunda linha. */
+  .funil__linha { position: relative; }
+  .funil__nome { grid-column: 1 / -1; padding-right: calc(var(--tap) + var(--s-2)); }
+  .funil__remover { position: absolute; top: 0; right: 0; }
   .funil__taxa { display: grid; gap: 0.3rem; }
   .funil__cenario { display: block; }
   .funil__taxa .campo__input { padding-inline: 0.6rem 1.6rem; }

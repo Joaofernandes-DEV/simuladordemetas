@@ -2,6 +2,36 @@
 
 Tudo o que muda no projeto entra aqui, no mesmo commit ou PR da mudança. Horários em Brasília (AAAA-MM-DD HH:MM). Entradas mais novas no topo.
 
+## 2026-11-07 11:22 — Publicação na main
+
+- A pedido do João, merges em ordem com check da Vercel verde: #1 (E0), #2 (E1), #3 (E2) e #4 (E4) já estão na `main`; cada PR seguinte foi reapontado para a `main` antes do merge. Este registro entra junto com o #5 (E5), o último da fila.
+- Produção: https://simuladordemetas.vercel.app (deploy automático da `main`).
+- As branches das etapas continuam no GitHub; apagar fica a critério do João.
+
+## 2026-11-07 11:17 — E5: acabamento
+
+**Feito**
+- Contraste medido (script de cálculo WCAG) nas combinações dos dois temas. Corrigido:
+  - link "Pular para o conteúdo": fundo `#0066cc` (branco sobre `#2997ff` dava 3,02);
+  - foco: usa o azul de texto do tema (no claro, `#2997ff` dava 2,77 contra o mínimo de 3);
+  - laranja no claro: `#a04500` (o anterior dava 3,94 no aviso);
+  - contorno dos campos: 40% no escuro e 55% no claro (antes 1,56 a 1,95; agora ≥ 3,5).
+- Ordem do Tab no funil igual à visual: nome, taxas, remover. No celular, o × fica no canto da linha e o nome usa a largura toda.
+- `theme-color` para a barra do navegador no celular e aviso em `<noscript>`.
+- Testes novos: todo campo e botão tem nome acessível; um único `h1` e títulos sem pular nível.
+- README: como o cálculo funciona (com o exemplo à mão) e acessibilidade.
+
+**Verificado**
+- `npm run build` e 74 testes passando.
+- Teclado: "Pular para o conteúdo" leva ao conteúdo; 27 paradas de Tab em ordem lógica; nenhum `tabindex` positivo.
+- 1920 px (iframe escalado): conteúdo centralizado em 80rem, sem rolagem lateral, cenários em três colunas.
+- 360 px no tema claro: sem rolagem lateral, todos os alvos visíveis com pelo menos 44 px, nomes das etapas inteiros.
+- Regras de `prefers-reduced-motion`, `prefers-reduced-transparency` e `prefers-contrast: more` presentes no CSS servido.
+- Varredura final de segredos, dados pessoais, nome de empresa e promessas de resultado nos arquivos e no histórico: nada encontrado.
+
+**Não testado ainda**
+- As preferências do sistema ligadas de verdade (não dá para ativar pela automação do navegador), celular real, leitor de tela real, Safari e o CSV no Excel.
+
 ## 2026-11-07 11:09 — E4: exportar e importar (JSON e CSV)
 
 **Feito**

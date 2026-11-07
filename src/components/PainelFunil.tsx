@@ -53,32 +53,18 @@ export function PainelFunil({ s, mudar }: Props) {
           const nome = e.nome.trim() || 'sem nome';
           return (
             <li key={e.id} className="funil__linha">
-              {/* No desktop, `display: contents` põe nome e botão na grade da linha; no celular, viram uma faixa. */}
-              <div className="funil__topo-linha">
-                <div className="campo funil__nome">
-                  <label htmlFor={`nome-${e.id}`} className="sr-only">Nome da etapa {i + 1}</label>
-                  <span className="funil__ordem" aria-hidden="true">{i + 1}</span>
-                  <input
-                    id={`nome-${e.id}`}
-                    className="campo__input"
-                    type="text"
-                    value={e.nome}
-                    maxLength={40}
-                    onChange={(ev) => mudar(renomearEtapa(s, e.id, ev.target.value))}
-                  />
-                </div>
-                <button
-                  type="button"
-                  className="icon-btn funil__remover"
-                  onClick={() => remover(e.id, i)}
-                  disabled={unica}
-                  aria-label={`Remover a etapa ${nome}`}
-                  title={unica ? 'O funil precisa de pelo menos uma etapa' : undefined}
-                >
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" aria-hidden="true">
-                    <path d="M6 6l12 12M18 6L6 18" />
-                  </svg>
-                </button>
+              {/* Ordem do DOM = ordem do Tab: nome, taxas, remover. No celular, o CSS põe o × ao lado do nome. */}
+              <div className="campo funil__nome">
+                <label htmlFor={`nome-${e.id}`} className="sr-only">Nome da etapa {i + 1}</label>
+                <span className="funil__ordem" aria-hidden="true">{i + 1}</span>
+                <input
+                  id={`nome-${e.id}`}
+                  className="campo__input"
+                  type="text"
+                  value={e.nome}
+                  maxLength={40}
+                  onChange={(ev) => mudar(renomearEtapa(s, e.id, ev.target.value))}
+                />
               </div>
               {s.cenarios.map((c) => (
                 <div key={c.id} className="funil__taxa">
@@ -95,6 +81,18 @@ export function PainelFunil({ s, mudar }: Props) {
                   />
                 </div>
               ))}
+              <button
+                type="button"
+                className="icon-btn funil__remover"
+                onClick={() => remover(e.id, i)}
+                disabled={unica}
+                aria-label={`Remover a etapa ${nome}`}
+                title={unica ? 'O funil precisa de pelo menos uma etapa' : undefined}
+              >
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" aria-hidden="true">
+                  <path d="M6 6l12 12M18 6L6 18" />
+                </svg>
+              </button>
             </li>
           );
         })}
