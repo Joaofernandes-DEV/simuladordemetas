@@ -27,6 +27,25 @@ Abra o endereço que aparecer no terminal (normalmente http://localhost:5173).
 
 Vite + React + TypeScript (estrito) + Tailwind 4, testes com Vitest. Sem backend e sem serviços externos: fonte Inter dentro do repositório, CSP estrita em `vercel.json`. Hospedagem na Vercel.
 
+## Como o cálculo funciona
+
+O funil é calculado **de trás para frente**, partindo da meta (a última etapa):
+
+1. Para cada etapa, da última para a primeira: `necessário na etapa anterior = ⌈necessário nesta etapa ÷ taxa desta etapa⌉`. A taxa é a porcentagem da etapa anterior que chega a esta (na primeira etapa, a porcentagem dos contatos).
+2. O arredondamento é sempre **para cima**, em cada etapa (não existe meia pessoa).
+3. `contatos restantes = contatos no total − contatos já feitos` (nunca abaixo de zero).
+4. `dias de trabalho = dias entre o início e o fim, os dois incluídos, no modo escolhido (seg–sex, seg–sáb ou corridos) − folgas e feriados`.
+5. `contatos por dia = ⌈contatos restantes ÷ dias de trabalho⌉`.
+
+**Exemplo conferido à mão** (valores fictícios): meta de 10 matrículas; 25% dos comparecimentos viram matrícula, 50% dos agendamentos comparecem, 40% dos contatos agendam; prazo de 09/11 a 04/12/2026 em dias úteis (20 dias).
+10 ÷ 0,25 = **40** comparecimentos → 40 ÷ 0,5 = **80** agendamentos → 80 ÷ 0,4 = **200** contatos → 200 ÷ 20 = **10 contatos por dia**.
+
+Cada cenário mostra um aviso quando algo falta (**incompleto**) ou não fecha (**inviável**: taxa 0% ou acima de 100%, datas trocadas, mais folgas que dias, ou contatos por dia acima da capacidade informada).
+
+## Acessibilidade
+
+Teclado completo, foco visível, contraste AA medido nos dois temas, rótulos em todos os campos, avisos anunciados para leitor de tela, alvos de toque de 2,75rem, layout de 360 px a 1920 px, e respeito a "reduzir movimento", "reduzir transparência" e "mais contraste".
+
 ## Salvar e abrir
 
 - **Exportar JSON:** guarda a simulação inteira (meta, prazo, etapas e taxas dos três cenários).
