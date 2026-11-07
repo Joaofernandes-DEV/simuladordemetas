@@ -2,6 +2,24 @@
 
 Tudo o que muda no projeto entra aqui, no mesmo commit ou PR da mudança. Horários em Brasília (AAAA-MM-DD HH:MM). Entradas mais novas no topo.
 
+## 2026-11-07 10:55 — E1: funções puras do funil
+
+**Feito** (em `src/domain/`, sem React, sem data do sistema, sem armazenamento)
+- `types.ts`: etapas compartilhadas por todos os cenários; cada cenário tem só as suas taxas (0 a 1, `null` = vazia).
+- `funil.ts`: funil de trás para frente, com arredondamento para cima em cada etapa e proteção contra ruído de ponto flutuante (57 ÷ 0,57 dá 100, não 101); validação das taxas (vazia = incompleto; 0% ou acima de 100% = inviável).
+- `prazo.ts`: dias entre início e fim, os dois incluídos, nos modos seg–sex, seg–sáb e corridos, em UTC.
+- `simular.ts`: junta tudo por cenário: total de contatos, restantes (menos os já feitos), dias (menos folgas), contatos por dia e avisos (incompleto, inviável e informativo). Capacidade diária opcional gera aviso de inviável.
+
+**Verificado**
+- 35 testes passando. Exemplo conferido à mão: meta 10; 25% (comparecimento → matrícula), 50% (agendamento → comparecimento) e 40% (contato → agendamento); 09/11 a 04/12/2026 em seg–sex = 20 dias → 40 → 80 → 200 contatos → 10 por dia.
+- Preview do PR #1 na Vercel: check verde, CSP e cabeçalhos servidos, Inter carregando.
+
+**Não testado ainda**
+- Nada de tela nesta etapa (a E2 liga as funções à interface).
+
+**Decidido para a E2** (o João deixou a escolha comigo, opção "a")
+- Valores iniciais fictícios, marcados na tela: meta 10; etapas Agendamento, Comparecimento e Matrícula; taxas conservador 30% / 40% / 20%, realista 40% / 50% / 25% (o exemplo à mão) e otimista 50% / 60% / 30%. São marcadores de lugar, não referências de mercado.
+
 ## 2026-11-07 10:50 — Vercel ligada
 
 - Projeto `simuladordemetas` criado na Vercel (autorizado pelo João), ligado ao GitHub: produção na `main`, preview em cada PR.
