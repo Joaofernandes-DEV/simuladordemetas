@@ -2,6 +2,23 @@
 
 Tudo o que muda no projeto entra aqui, no mesmo commit ou PR da mudança. Horários em Brasília (AAAA-MM-DD HH:MM). Entradas mais novas no topo.
 
+## 2026-11-07 11:09 — E4: exportar e importar (JSON e CSV)
+
+**Feito**
+- `src/domain/arquivo.ts` (funções puras): JSON com marca de formato e aviso de dados fictícios; CSV no formato do Excel brasileiro (decidido pelo João): `;`, vírgula decimal, taxas em %, BOM para acentos.
+- CSV protegido: aspas quando o nome tem `;`, aspas ou quebra de linha; apóstrofo antes de `=`, `+`, `-` e `@` para o Excel não executar texto como fórmula (removido de volta na importação).
+- Importação aceita o CSV salvo de novo pelo Excel (datas DD/MM/AAAA, sem BOM, separador `,`).
+- Validação de tudo que vem de fora: formato, versão, datas reais, modo, folgas, 1 a 20 etapas com id único, 1 a 5 cenários, taxas numéricas; limite de 200 KB.
+- Painel "Salvar e abrir": Exportar JSON, Exportar CSV e Importar arquivo. Erro em `role="alert"` e nada é alterado; sucesso em `role="status"`. Texto lembra que nada vai para servidor e que não se deve colocar dado pessoal de lead.
+- Correção: o campo numérico agora se atualiza no mesmo desenho quando o valor muda por fora (importação), sem um quadro com o número antigo.
+
+**Verificado**
+- 72 testes passando (ida e volta em JSON e CSV, nomes perigosos, CSV regravado pelo Excel, arquivos inválidos, exportar e importar pela tela).
+- Chrome: CSV e JSON gerados com o conteúdo certo (download interceptado, para não salvar arquivos no computador); CSV com meta 20 importado pelo seletor de arquivo → 42 / 20 / 12 por dia; `.xlsx` recusado sem alterar nada.
+
+**Não testado ainda**
+- Abrir o CSV no Excel de verdade e salvar de novo; download real no celular.
+
 ## 2026-11-07 10:58 — E2: tela do simulador
 
 **Feito**
