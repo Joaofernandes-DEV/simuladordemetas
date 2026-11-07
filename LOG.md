@@ -2,6 +2,12 @@
 
 Tudo o que muda no projeto entra aqui, no mesmo commit ou PR da mudança. Horários em Brasília (AAAA-MM-DD HH:MM). Entradas mais novas no topo.
 
+## 2026-11-07 11:22 — Publicação na main
+
+- A pedido do João, merges em ordem com check da Vercel verde: #1 (E0), #2 (E1), #3 (E2) e #4 (E4) já estão na `main`; cada PR seguinte foi reapontado para a `main` antes do merge. Este registro entra junto com o #5 (E5), o último da fila.
+- Produção: https://simuladordemetas.vercel.app (deploy automático da `main`).
+- As branches das etapas continuam no GitHub; apagar fica a critério do João.
+
 ## 2026-11-07 11:17 — E5: acabamento
 
 **Feito**
