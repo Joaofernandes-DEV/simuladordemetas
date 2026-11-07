@@ -2,6 +2,12 @@
 
 Tudo o que muda no projeto entra aqui, no mesmo commit ou PR da mudança. Horários em Brasília (AAAA-MM-DD HH:MM). Entradas mais novas no topo.
 
+## 2026-11-07 10:50 — Vercel ligada
+
+- Projeto `simuladordemetas` criado na Vercel (autorizado pelo João), ligado ao GitHub: produção na `main`, preview em cada PR.
+- Primeiro deploy de produção (só o README da `main`) ficou pronto em https://simuladordemetas.vercel.app.
+- O preview da `feat/base` nasce com este commit.
+
 ## 2026-11-07 10:41 — E0 aprovada
 
 - O João aprovou a tela da E0.
